@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: cost management api
+paths:
+  /:
+    get:
+      description: hello world endpoint
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+
+  /{id}/folders:
+    get:
+      description: Returns a list of folders of user
+      responses:
+        '200':
+          description: Successfully returned a list of folders
+          content:
+            application/json:
+              schema:
+                $ref: '#'#/components/schemas/Folders'
+
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+components:
+  schemas:
+    Folders:
+      type: array
+      $ref: '#'#/components/schemas/Folder'
+
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        owner_id:
+          type: string
+        folder_type:
+          type: string
+        currency:
+          type: string
