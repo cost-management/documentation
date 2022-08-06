@@ -5,6 +5,11 @@ info:
 paths:
   /:
     get:
+      parameters:
+        - in: header
+          name: id
+          schema:
+            type: string
       description: hello world endpoint
       responses:
         '200':
