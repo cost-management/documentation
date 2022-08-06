@@ -18,7 +18,7 @@ paths:
                     type: string
 
 
-  /{id}/folders:
+  /folders:
     get:
       description: Returns a list of folders of user
       responses:
@@ -27,7 +27,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#'#/components/schemas/Folders'
+                $ref: '#/components/schemas/Folders'
 
         '400':
           description: Invalid request
@@ -43,7 +43,7 @@ components:
   schemas:
     Folders:
       type: array
-      $ref: '#'#/components/schemas/Folder'
+      $ref: '#/components/schemas/Folder'
 
     Folder:
       type: object
