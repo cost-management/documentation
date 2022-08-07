@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: cost management api
+paths:
+  /:
+    get:
+      description: hello world endpoint
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+
+  /folders:
+    get:
+      parameters:
+        - in: header
+          name: id
+          schema:
+            type: string
+      description: Returns a list of folders of user
+      responses:
+        '200':
+          description: Successfully returned a list of folders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/folders'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+    post:
+      parameters:
+        - in: header
+          name: id
+          schema:
+            type: string
+      description: Add new folder
+      requestBody:
+        description: Body that contains folder attributes
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/folder'
+      responses:
+        '200':
+          description: Successfully add new folder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/uniqueId'
+        '400':
+          description: Folder adding fails
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+
+
+
+components:
+  schemas:
+    uniqueId:
+      type: object
+      properties:
+        id:
+          type: string
+
+    folders:
+      type: array
+      items:
+        $ref: '#/components/schemas/folder'
+
+    folder:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        owner_id:
+          type: string
+        folder_type:
+          type: string
+        currency:
+          type: string
